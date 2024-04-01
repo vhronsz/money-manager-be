@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.get("/", function(req,res,next){
+router.get("/", function (req, res, next) {
     res.json({
         type: "debug",
         response: {
@@ -10,29 +10,30 @@ router.get("/", function(req,res,next){
     });
 });
 
-router.post("/login", function(req,res,next){
-    const userAuthorized = false;
-    const username = req.params.username;
-    const password = req.params.password;
-    if(username === "iniRyan" && password === "iniPasswordnyaRyan"){
+router.post("/login", function (req, res, next) {
+    let userAuthorized = false;
+    const username = req.body.username;
+    const password = req.body.password;
+    
+    if (username === "iniRyan" && password === "iniPasswordnyaRyan") {
         //Sending correct response
         userAuthorized = true;
     }
-    if(!userAuthorized){
-        res.json({
+    if (!userAuthorized) {
+        res.status(400).json({
             type: "error",
             response: {
                 message: "Not Authorized"
             }
-        }, 400)
-    }else{
-        res.json({
-            type:"success",
-            response:{
+        });
+    } else {
+        res.status(200).json({
+            type: "success",
+            response: {
                 message: "Login Success",
-                user: {name: "admin", role: ["admin"], scope: [""]}
+                user: { name: "admin", role: ["admin"], scope: [""] }
             }
-        })
+        });
     }
 });
 
