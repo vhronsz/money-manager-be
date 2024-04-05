@@ -6,7 +6,7 @@ router.get("/", function(req,res,next){
   res.json({
       type: "debug",
       response: {
-          message: "testing /"
+          message: "testing '/'"
       }
   });
 });
