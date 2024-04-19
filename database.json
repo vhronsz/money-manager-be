@@ -1,10 +1,16 @@
 {
-    "dev": {
-      "host": "localhost",
-      "user": { "ENV" : "DB_USER" },
-      "password" : { "ENV" : "DB_PASS" },
-      "database": "database-name",
-      "driver": "mysql",
-      "multipleStatements": true
-    }
+  "dev": {
+    "host": {
+      "ENV": "DB_USER"
+    },
+    "user": {
+      "ENV": "DB_USER"
+    },
+    "password": {
+      "ENV": "DB_PASS"
+    },
+    "database": "database-name",
+    "driver": "mysql",
+    "multipleStatements": true
   }
+}
