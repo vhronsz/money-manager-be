@@ -1,15 +1,9 @@
 {
   "dev": {
-    "host": {
-      "ENV": "DB_USER"
-    },
-    "user": {
-      "ENV": "DB_USER"
-    },
-    "password": {
-      "ENV": "DB_PASS"
-    },
-    "database": "database-name",
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "money_manager",
     "driver": "mysql",
     "multipleStatements": true
   }
