@@ -16,13 +16,35 @@ exports.setup = function (options, seedLink) {
 
 exports.up = function (db) {
   return db.createTable("users", {
-    id: { type: "bigint", primaryKey: true, autoIncrement: true },
-    name: { type: "string", notNull: true },
-    email: { type: "string", notNull: true },
-    username: { type: "string", notNull: true },
-    password: { type: "string", notNull: true },
-    total_funds: { type: "int", defaultValue: 1 },
-    total_expenses: { type: "int", defaultValue: 1 },
+    id: {
+      type: "bigint",
+      primaryKey: true,
+      autoIncrement: true
+    },
+    name: {
+      type: "string",
+      notNull: true
+    },
+    email: {
+      type: "string",
+      notNull: true
+    },
+    username: {
+      type: "string",
+      notNull: true
+    },
+    password: {
+      type: "string",
+      notNull: true
+    },
+    fund_count: {
+      type: "int",
+      defaultValue: 1
+    },
+    expense_count: {
+      type: "int",
+      defaultValue: 1
+    },
   });
 };
 
