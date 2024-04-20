@@ -1,20 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-router.get("/", function (req, res, next) {
-    res.json({
-        type: "debug",
-        response: {
-            message: "testing /"
-        }
-    });
-});
-
 router.post("/login", function (req, res, next) {
     let userAuthorized = false;
     const username = req.body.username;
     const password = req.body.password;
-    
+    // terjadi validasi disini
     if (username === "iniRyan" && password === "iniPasswordnyaRyan") {
         //Sending correct response
         userAuthorized = true;

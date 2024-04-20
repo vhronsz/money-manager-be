@@ -1,2 +1,4 @@
 //Buat Class biasa
-class User{ }
+class User{ 
+    
+}
