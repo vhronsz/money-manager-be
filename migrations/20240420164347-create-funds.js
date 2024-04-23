@@ -42,6 +42,14 @@ exports.up = function (db) {
       "total": {
         type: "decimal",
         notNull: true
+      },
+      "created_at": {
+        type: "datetime",
+        defaultValue: Date.now()
+      },
+      "deleted_at": {
+        type: "datetime",
+        defaultValue: Date.now()
       }
     }, createFundTransactionsTable);
 
@@ -87,15 +95,23 @@ exports.up = function (db) {
           "total": {
             type: "decimal",
             notNull: true
+          },
+          "created_at": {
+            type: "datetime",
+            defaultValue: Date.now()
+          },
+          "deleted_at": {
+            type: "datetime",
+            defaultValue: Date.now()
           }
-        });
+        })
     }
   }
 };
 
 exports.down = function (db) {
   return db.dropTable("fund_transactions").then(
-    function(){
+    function () {
       db.dropTable("funds");
     }
   );

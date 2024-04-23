@@ -18,22 +18,24 @@ exports.up = function (db) {
   return db.createTable("users", {
     id: {
       type: "bigint",
-      primaryKey: true,
+      primaryKey: {
+        value: true,
+        multipleColumn: true
+      },
       autoIncrement: true
+    },
+    auth_user_id: {
+      type: "bigint",
+      primaryKey: {
+        value: true,
+        multipleColumn: true
+      }
     },
     name: {
       type: "string",
       notNull: true
     },
     email: {
-      type: "string",
-      notNull: true
-    },
-    username: {
-      type: "string",
-      notNull: true
-    },
-    password: {
       type: "string",
       notNull: true
     },
