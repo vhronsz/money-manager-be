@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var authRouter = require('./routes/auth.js');
-var indexRouter = require('./routes/index.js');
 var cors = require("cors");
 
 var app = express();
@@ -15,9 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', indexRouter);
 app.use('/auth', authRouter);
-app.use('/',indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -32,7 +29,11 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.send(err.message);
+  res.json({
+    type: "ERROR",
+    message: err,
+    data: {...err}
+  });
   // res.render('error');
 });
 

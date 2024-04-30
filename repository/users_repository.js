@@ -1,9 +1,11 @@
-const db = require('./connection');
+const db = require("./db");
 
-function testing(){
-  
+async function getUser(searchParam) {
+   const query =
+      "select * from users u where u.username = ?";
+   return await db.searchQuery(query, [searchParam]);
 }
 
 module.exports = {
-  testing
-};
+   getUser
+}
