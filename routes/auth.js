@@ -9,25 +9,18 @@ var ResponseDto = require("../dto/responseDto");
 
 router.post("/login", async function (req, res, next) {
 
+    try{
     let isAuthenticated = false;
     let response = new ResponseDto();
 
     const username = req.body.username;
     const password = req.body.password;
 
-    axios.post(
+    const user = await axios.post(
         "http://localhost:9200/auth/login",
         {
             username: username,
             password: password
-        }
-    ).then(
-        (res) => {
-            console.log(res)
-        }
-    ).catch(
-        (err) => {
-            next(err)
         }
     );
 
@@ -38,7 +31,10 @@ router.post("/login", async function (req, res, next) {
         response.data = {};
         return res.json(json)
     }
-
+    }catch(err){
+        console.log(err);
+        next(err);
+    }
 });
 
 module.exports = router;
