@@ -47,6 +47,11 @@ exports.up = function (db) {
       type: "int",
       defaultValue: 1
     },
+    "created_at": {
+      type: "string",
+      defaultValue: Date.now()
+    },
+    "deleted_at": "string"
   });
 };
 

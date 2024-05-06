@@ -44,13 +44,10 @@ exports.up = function (db) {
         notNull: true
       },
       "created_at": {
-        type: "datetime",
+        type: "string",
         defaultValue: Date.now()
       },
-      "deleted_at": {
-        type: "datetime",
-        defaultValue: Date.now()
-      }
+      "deleted_at": "string"
     }, createExpensesTransactionsTable);
 
   function createExpensesTransactionsTable(err) {
@@ -97,13 +94,10 @@ exports.up = function (db) {
             notNull: true
           },
           "created_at": {
-            type: "datetime",
+            type: "string",
             defaultValue: Date.now()
           },
-          "deleted_at": {
-            type: "datetime",
-            defaultValue: Date.now()
-          }
+          "deleted_at": "string"
         });
     }
   }
