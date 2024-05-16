@@ -5,6 +5,7 @@ var router = express.Router();
 var axios = require("axios");
 
 router.post("/login", async function (req, res, next) {
+    console.log(req.cookies);
     try {
         const username = req.body.username;
         const password = req.body.password;
@@ -16,11 +17,35 @@ router.post("/login", async function (req, res, next) {
                 password: password
             }
         )
-        return res.json(response.data);
+
+        if (response.data.type === "SUCCESS") {
+            const cookie = response.data.data.token
+            const now = Date.now();
+            const cookieExpiration = new Date(now + 1800000);
+            return res.cookie(
+                "session",
+                cookie,
+                {
+                    expires: cookieExpiration,
+                    sameSite: false
+                }
+            ).json(
+                {
+                    "type": response.data.type,
+                    "message": response.data.message
+                }
+            );
+        }
+
+        return res.json({
+            "type": response.data.type,
+            "message": response.data.message
+
+        })
     } catch (err) {
         console.log(err);
         next(err);
     }
-}); 
+});
 
 module.exports = router;
