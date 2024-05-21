@@ -5,7 +5,6 @@ var router = express.Router();
 var axios = require("axios");
 
 router.post("/login", async function (req, res, next) {
-    console.log(req.cookies);
     try {
         const username = req.body.username;
         const password = req.body.password;
@@ -23,11 +22,10 @@ router.post("/login", async function (req, res, next) {
             const now = Date.now();
             const cookieExpiration = new Date(now + 1800000);
             return res.cookie(
-                "session",
+                "token",
                 cookie,
                 {
-                    expires: cookieExpiration,
-                    sameSite: false
+                    expires: cookieExpiration
                 }
             ).json(
                 {
