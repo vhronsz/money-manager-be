@@ -3,11 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var authRouter = require('./routes/auth.js');
 var cors = require("cors");
 var sessionMiddleware = require('./middleware/session_middleware.js');
 
+var authRouter = require('./routes/auth.js');
+var walletRouter = require("./routes/wallet.js");
+
 var app = express();
+
 
 app.disable('x-powered-by');
 app.use(logger('dev'));
@@ -24,7 +27,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/auth', sessionMiddleware.checkSessionLife, authRouter);
+app.use('/auth', authRouter);
+app.use('/wallet', sessionMiddleware.checkSessionLife, walletRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
