@@ -4,20 +4,22 @@ const axios = require("axios");
 const jwt = require("jsonwebtoken");
 
 async function checkSessionLife(req, res, next) {
-    if (req.cookies.token) {
-        const url = `${process.env.AUTH_URL}/auth/verify`;
-
-        // if token exist then verif the token through auth service
-        const response = await axios.post(url,{token: req.cookies.token});
-        const responseData = response.data;
-
-        if(responseData.status === "TOKEN_EXPIRED"){
-            
-        }
-    }
+  const url = `${process.env.AUTH_URL}/auth/verify`;
+  try {
+    const response = await axios.post(
+      url,
+      { token: req.cookies.token },
+      { headers: { APP_SOURCE: "money_manager" } }
+    );
     next();
+  } catch (e) {
+    console.log(e);
+    return res.status(401).json({
+      'message': "Unable to authenticate user",
+    });
+  }
 }
 
 module.exports = {
-    checkSessionLife
-}
+  checkSessionLife,
+};

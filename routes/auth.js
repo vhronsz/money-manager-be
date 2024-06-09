@@ -5,10 +5,11 @@ var router = express.Router();
 var axios = require("axios");
 
 router.post("/login", async function (req, res, next) {
+  const username = req.body.username ? req.body.username : "";
+  const password = req.body.password ? req.body.password : "";
+  const URL = `${process.env.AUTH_URL}/auth/login`;
+
   try {
-    const username = req.body.username;
-    const password = req.body.password;
-    const URL = `${process.env.AUTH_URL}/auth/login`;
     const response = await axios.post(
       URL,
       {
@@ -22,27 +23,23 @@ router.post("/login", async function (req, res, next) {
       }
     );
 
-    if (response.data.type === "SUCCESS") {
-      const cookie = response.data.data.token;
-      const now = Date.now();
-      const cookieExpiration = new Date(now + 1800000);
-      return res
-        .cookie("token", cookie, {
-          expires: cookieExpiration,
-        })
-        .json({
-          type: response.data.type,
-          message: response.data.message,
-        });
-    }
 
-    return res.json({
-      type: response.data.type,
-      message: response.data.message,
-    });
+    console.log("asdsd");
+
+    const cookie = response.data.data.token;
+    const now = Date.now();
+    const cookieExpiration = new Date(now + 1800000);
+
+    return res
+      .cookie("token", cookie, {
+        expires: cookieExpiration,
+      })
+      .json({
+        message: response.data.message,
+      }).status(200);
+
   } catch (err) {
-    console.log(err);
-    next(err);
+    return res.status(401).json("Belom kelar")
   }
 });
 

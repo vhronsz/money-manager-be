@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "local": "dotenvx run --env-file=.env.local -- node ./bin/www"
+    "dev": "dotenvx run --env-file=.env.dev -- node ./bin/www"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^0.35.1",
