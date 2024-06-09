@@ -10,36 +10,38 @@ router.post("/login", async function (req, res, next) {
   const URL = `${process.env.AUTH_URL}/auth/login`;
 
   try {
-    const response = await axios.post(
-      URL,
-      {
-        username: username,
-        password: password,
+    const response = await axios({
+      method: "POST",
+      url: URL,
+      data: {
+        "username": username,
+        "password": password
       },
-      {
-        headers: {
-          app_source: "MONEY_MANAGER",
-        },
-      }
-    );
+      headers: {
+        "Content-Type": "application/json",
+        "app_source": "MONEY_MANAGER",
+      },
+      withCredentials: true
+    });
 
-
-    console.log("asdsd");
-
-    const cookie = response.data.data.token;
+    const cookie = "asd";
     const now = Date.now();
     const cookieExpiration = new Date(now + 1800000);
 
     return res
+      .status(200)
       .cookie("token", cookie, {
         expires: cookieExpiration,
       })
       .json({
         message: response.data.message,
-      }).status(200);
+      });
 
   } catch (err) {
-    return res.status(401).json("Belom kelar")
+    console.log(err);
+    return res.status(401).json({
+      message: "message"
+    })
   }
 });
 
