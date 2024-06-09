@@ -39,8 +39,9 @@ router.post("/login", async function (req, res, next) {
 
   } catch (err) {
     console.log(err);
+    const message = err.response.data.message;
     return res.status(401).json({
-      message: "message"
+      message: message
     })
   }
 });
