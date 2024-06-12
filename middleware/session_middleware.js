@@ -15,6 +15,7 @@ async function checkSessionLife(req, res, next) {
   } catch (e) {
     console.log(e);
     return res.status(401).json({
+      'ok': false,
       'message': "Unable to authenticate user",
     });
   }
